@@ -94,7 +94,7 @@ export default function HomePage() {
             </form>
 
             {/* Quick Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+            {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-600">500+</div>
                 <div className="text-sm text-muted-foreground">Verified Sellers</div>
@@ -111,7 +111,7 @@ export default function HomePage() {
                 <div className="text-2xl font-bold text-orange-600">10K+</div>
                 <div className="text-sm text-muted-foreground">Reviews</div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

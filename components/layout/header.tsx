@@ -3,13 +3,15 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Search, ShoppingCart, HeartIcon, Menu, User, LogOut } from 'lucide-react';
+import { Search, ShoppingCart, HeartIcon, Menu, User, LogOut, Store } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { useAuth } from '@/lib/contexts/auth-context';
 import { useCart } from '@/lib/contexts/cart-context';
 import { useWishlist } from '@/lib/contexts/wishlist-context';
+import dbConnect from '@/lib/contexts/mongodb.js';
+import UserSchema from '@/models/User';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,13 +22,14 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import  GoogleTranslate  from '@/components/google-translate';
 
 
-export function Header() {
+export async function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
   const { user, userProfile, signOut } = useAuth();
   const { getTotalItems } = useCart();
   const { items: wishlistItems } = useWishlist();
-
+  
+  
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -43,9 +46,9 @@ export function Header() {
     { name: 'Home', href: '/' },
     { name: 'Discover', href: '/discovery' },
     { name: 'Map', href: '/map' },
-    { name: 'Reviews', href: '/reviews' },
+    // { name: 'Reviews', href: '/reviews' },
     { name: 'Checklist', href: '/checklist' },
-    { name: 'Community', href: '/community' },
+    // { name: 'Community', href: '/community' },
     { name: 'Price Comparison', href: '/price-comparison' },
   ];
 
@@ -95,7 +98,7 @@ export function Header() {
             <GoogleTranslate />
             <ThemeToggle />
             
-            {user ? (
+            {/* {user ? ( */}
               <>
                 {/* Cart */}
                 <Link href="/cart">
@@ -130,9 +133,16 @@ export function Header() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-56">
                     <div className="px-2 py-1.5 text-sm">
-                      <div className="font-medium">{userProfile?.name}</div>
-                      <div className="text-muted-foreground">{userProfile?.phone}</div>
+                      <div className="font-medium">{name}</div>
+                      <div className="text-muted-foreground">{email}</div>
                     </div>
+                    {userType === 'wholesaler' && (
+                      <DropdownMenuItem onClick={() => router.push('/shop-details')}>
+                        <Store className="mr-2 h-4 w-4" />
+                        Shop
+                      </DropdownMenuItem>
+                    )}
+
                     <DropdownMenuItem onClick={handleSignOut}>
                       <LogOut className="mr-2 h-4 w-4" />
                       Sign Out
@@ -140,11 +150,11 @@ export function Header() {
                   </DropdownMenuContent>
                 </DropdownMenu>
               </>
-             ) : (
+             {/* ) : (
                <Link href="/auth">
                  <Button>Sign In</Button>
                </Link>
-             )}
+             )} */}
 
             {/* Mobile Menu */}
             <Sheet>
