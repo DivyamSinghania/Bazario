@@ -197,14 +197,14 @@ export default function DiscoveryPage() {
                   placeholder="Search suppliers, products, or areas..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 focus:border-[#34699a] focus:ring-[#34699a]" // Focus styling
                 />
               </div>
             </form>
             
             <div className="flex gap-2">
               <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] focus:ring-[#34699a] focus:border-[#34699a]"> {/* Focus styling */}
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -218,13 +218,13 @@ export default function DiscoveryPage() {
               
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="outline" size="icon">
+                  <Button variant="outline" size="icon" className="text-[#34699a] border-[#34699a] hover:bg-[#34699a]/10 hover:text-[#34699a]">
                     <SlidersHorizontal className="h-4 w-4" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent>
                   <SheetHeader>
-                    <SheetTitle>Filters</SheetTitle>
+                    <SheetTitle className="text-[#34699a]">Filters</SheetTitle> {/* Title in accent color */}
                     <SheetDescription>
                       Refine your search results
                     </SheetDescription>
@@ -240,7 +240,7 @@ export default function DiscoveryPage() {
                           max={20}
                           min={1}
                           step={0.5}
-                          className="w-full"
+                          className="w-full [&>span:first-child]:bg-[#34699a] [&>span:first-child]:shadow-lg" // Slider track and thumb in accent color
                         />
                         <div className="flex justify-between text-xs text-muted-foreground mt-1">
                           <span>1 km</span>
@@ -259,7 +259,7 @@ export default function DiscoveryPage() {
                           max={5}
                           min={0}
                           step={0.1}
-                          className="w-full"
+                          className="w-full [&>span:first-child]:bg-[#34699a] [&>span:first-child]:shadow-lg" // Slider track and thumb in accent color
                         />
                         <div className="flex justify-between text-xs text-muted-foreground mt-1">
                           <span>0 ⭐</span>
@@ -275,7 +275,7 @@ export default function DiscoveryPage() {
                         id="openNow"
                         checked={openNow}
                         onChange={(e) => setOpenNow(e.target.checked)}
-                        className="rounded"
+                        className="rounded accent-[#34699a]" // Checkbox color
                       />
                       <Label htmlFor="openNow" className="text-sm">Open now only</Label>
                     </div>
@@ -293,6 +293,11 @@ export default function DiscoveryPage() {
                 variant={selectedCategory === category ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedCategory(category)}
+                className={
+                  selectedCategory === category
+                    ? 'bg-[#34699a] text-white hover:bg-[#2c5882]' // Active button in accent color
+                    : 'border-[#34699a] text-[#34699a] hover:bg-[#34699a]/10 hover:text-[#34699a]' // Outline button in accent color
+                }
               >
                 {category}
               </Button>
@@ -365,13 +370,16 @@ export default function DiscoveryPage() {
               <p className="text-muted-foreground mb-4">
                 Try adjusting your search terms or filters
               </p>
-              <Button onClick={() => {
-                setSearchQuery('');
-                setSelectedCategory('All');
-                setMaxDistance([10]);
-                setMinRating([0]);
-                setOpenNow(false);
-              }}>
+              <Button
+                style={{ backgroundColor: '#34699A', color: 'white' }} // Inline style for background and text color
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedCategory('All');
+                  setMaxDistance([10]);
+                  setMinRating([0]);
+                  setOpenNow(false);
+                }}
+              >
                 Clear All Filters
               </Button>
             </div>

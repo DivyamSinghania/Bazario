@@ -120,7 +120,8 @@ export default function ShopPage() {
                     {shop.area}, {shop.city} • {shop.distance} km
                   </div>
                   <div className="flex items-center">
-                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 mr-1" />
+                    {/* Star color is amber-500 */}
+                    <Star className="w-4 h-4 fill-amber-500 text-amber-500 mr-1" />
                     {shop.rating} ({shop.reviews} reviews)
                   </div>
                 </div>
@@ -197,7 +198,8 @@ export default function ShopPage() {
                             </Button>
                           </div>
                           
-                          <Button onClick={() => handleAddToCart(product)}>
+                          {/* Changed Add to Cart button to #34699a */}
+                          <Button onClick={() => handleAddToCart(product)} className="bg-[#34699a] hover:bg-[#2c5882] text-white">
                             <ShoppingCart className="w-4 h-4 mr-2" />
                             Add to Cart
                           </Button>
@@ -262,7 +264,7 @@ export default function ShopPage() {
                                   key={i}
                                   className={`w-4 h-4 ${
                                     i < review.rating
-                                      ? 'fill-yellow-400 text-yellow-400'
+                                      ? 'fill-amber-500 text-amber-500' 
                                       : 'text-gray-300'
                                   }`}
                                 />
@@ -293,7 +295,8 @@ export default function ShopPage() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span>Status:</span>
-                    <Badge className={shop.openNow ? 'bg-green-500' : 'bg-red-500'}>
+                    {/* Open/Closed Badge colors remain */}
+                    <Badge className={shop.openNow ? 'bg-[#5CB85C]' : 'bg-rose-500'}>
                       {shop.openNow ? 'Open Now' : 'Closed'}
                     </Badge>
                   </div>
@@ -307,7 +310,8 @@ export default function ShopPage() {
                 <CardTitle>Quick Actions</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Button className="w-full">
+                {/* Changed Call Now button to #34699a */}
+                <Button className="w-full bg-[#34699a] hover:bg-[#2c5882] text-white">
                   <Phone className="w-4 h-4 mr-2" />
                   Call Now
                 </Button>

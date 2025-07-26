@@ -34,7 +34,7 @@ export default function CartPage() {
 
   const handleCheckout = async () => {
     setIsProcessing(true);
-    // Simulate checkout process
+    // Simulate API call or processing time
     await new Promise(resolve => setTimeout(resolve, 2000));
     toast.success('Order placed successfully!');
     clearCart();
@@ -63,7 +63,7 @@ export default function CartPage() {
               Looks like you haven't added any items to your cart yet. Start exploring our suppliers!
             </p>
             <Link href="/discovery">
-              <Button size="lg">
+              <Button size="lg" className="bg-[#34699a] text-white hover:bg-[#2c5882]">
                 <ShoppingBag className="w-5 h-5 mr-2" />
                 Start Shopping
               </Button>
@@ -85,15 +85,15 @@ export default function CartPage() {
               </Button>
             </Link>
             <div>
-              <h1 className="text-3xl font-bold">Shopping Cart</h1>
+              <h1 className="text-3xl font-bold text-[#34699a]">Shopping Cart</h1>
               <p className="text-muted-foreground">
                 {getTotalItems()} {getTotalItems() === 1 ? 'item' : 'items'} in your cart
               </p>
             </div>
           </div>
-          
+
           {items.length > 0 && (
-            <Button variant="outline" onClick={handleClearCart}>
+            <Button variant="outline" onClick={handleClearCart} className="border-[#34699a] text-[#34699a] hover:bg-[#34699a]/10">
               <Trash2 className="w-4 h-4 mr-2" />
               Clear Cart
             </Button>
@@ -106,7 +106,7 @@ export default function CartPage() {
             {Object.entries(groupedItems).map(([shopId, { shopName, items: shopItems }]) => (
               <Card key={shopId}>
                 <CardHeader>
-                  <CardTitle className="flex items-center">
+                  <CardTitle className="flex items-center text-[#34699a]">
                     <ShoppingBag className="w-5 h-5 mr-2" />
                     {shopName}
                   </CardTitle>
@@ -115,18 +115,18 @@ export default function CartPage() {
                   {shopItems.map((item) => (
                     <div key={item.id} className="flex items-center space-x-4 p-4 border rounded-lg">
                       <div className="w-16 h-16 bg-cover bg-center rounded-md" style={{ backgroundImage: `url(${item.image})` }} />
-                      
+
                       <div className="flex-1">
                         <h3 className="font-semibold">{item.name}</h3>
                         <p className="text-sm text-muted-foreground">From {item.shopName}</p>
-                        <p className="text-lg font-bold text-primary">₹{item.price}</p>
+                        <p className="text-lg font-bold text-[#34699a]">₹{item.price}</p> {/* Item price in accent color */}
                       </div>
-                      
+
                       <div className="flex items-center space-x-2">
                         <Button
                           variant="outline"
                           size="icon"
-                          className="h-8 w-8"
+                          className="h-8 w-8 hover:bg-[#34699a]/10 hover:text-[#34699a]" // Hover effect for quantity buttons
                           onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
                         >
                           <Minus className="w-3 h-3" />
@@ -135,15 +135,15 @@ export default function CartPage() {
                         <Button
                           variant="outline"
                           size="icon"
-                          className="h-8 w-8"
+                          className="h-8 w-8 hover:bg-[#34699a]/10 hover:text-[#34699a]" // Hover effect for quantity buttons
                           onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
                         >
                           <Plus className="w-3 h-3" />
                         </Button>
                       </div>
-                      
+
                       <div className="text-right">
-                        <p className="font-bold">₹{item.price * item.quantity}</p>
+                        <p className="font-bold text-[#34699a]">₹{item.price * item.quantity}</p> {/* Total item price in accent color */}
                         <Button
                           variant="ghost"
                           size="sm"
@@ -164,7 +164,7 @@ export default function CartPage() {
           <div className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>Order Summary</CardTitle>
+                <CardTitle className="text-[#34699a]">Order Summary</CardTitle> {/* Card title in accent color */}
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
@@ -181,23 +181,23 @@ export default function CartPage() {
                     <span>-₹25</span>
                   </div>
                 </div>
-                
+
                 <Separator />
-                
-                <div className="flex justify-between text-lg font-bold">
+
+                <div className="flex justify-between text-lg font-bold text-[#34699a]"> {/* Total amount in accent color */}
                   <span>Total</span>
                   <span>₹{getTotalPrice() + 50 - 25}</span>
                 </div>
-                
+
                 <Button 
-                  className="w-full" 
+                  className="w-full bg-[#34699a] text-white hover:bg-[#2c5882]" // Checkout button in accent color
                   size="lg"
                   onClick={handleCheckout}
                   disabled={isProcessing}
                 >
                   {isProcessing ? 'Processing...' : 'Proceed to Checkout'}
                 </Button>
-                
+
                 <p className="text-xs text-muted-foreground text-center">
                   By placing an order, you agree to our terms and conditions
                 </p>
@@ -206,7 +206,7 @@ export default function CartPage() {
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-sm">Delivery Information</CardTitle>
+                <CardTitle className="text-sm text-[#34699a]">Delivery Information</CardTitle> {/* Card title in accent color */}
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground">
                 <p>Standard delivery: 2-3 business days</p>

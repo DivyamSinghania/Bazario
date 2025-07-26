@@ -62,6 +62,20 @@ const ChecklistPage: React.FC = () => {
       { id: '5', name: 'Almonds', category: 'Dry Fruits', unit: 'kg', estimatedPrice: 700, isChecked: false, notes: '' },
       { id: '6', name: 'Silver Foil', category: 'Decoration', unit: 'packet', estimatedPrice: 200, isChecked: false, notes: '' }
     ],
+    snacks: [ // Added snacks with example data
+      { id: '1', name: 'Potatoes', category: 'Vegetables', unit: 'kg', estimatedPrice: 30, isChecked: false, notes: '' },
+      { id: '2', name: 'Besan (Gram Flour)', category: 'Flour & Grains', unit: 'kg', estimatedPrice: 70, isChecked: false, notes: '' },
+      { id: '3', name: 'Chaat Masala', category: 'Spices', unit: 'kg', estimatedPrice: 180, isChecked: false, notes: '' },
+      { id: '4', name: 'Refined Oil', category: 'Oil', unit: 'liter', estimatedPrice: 110, isChecked: false, notes: '' },
+      { id: '5', name: 'Salt', category: 'Seasoning', unit: 'kg', estimatedPrice: 20, isChecked: false, notes: '' },
+    ],
+    juice: [ // Added juice with example data
+      { id: '1', name: 'Oranges', category: 'Fruits', unit: 'kg', estimatedPrice: 70, isChecked: false, notes: '' },
+      { id: '2', name: 'Apples', category: 'Fruits', unit: 'kg', estimatedPrice: 100, isChecked: false, notes: '' },
+      { id: '3', name: 'Sugar', category: 'Sweeteners', unit: 'kg', estimatedPrice: 40, isChecked: false, notes: '' },
+      { id: '4', name: 'Ice', category: 'Other', unit: 'kg', estimatedPrice: 10, isChecked: false, notes: '' },
+      { id: '5', name: 'Disposable Glasses', category: 'Packaging', unit: 'packet', estimatedPrice: 90, isChecked: false, notes: '' },
+    ],
     custom: []
   };
 
@@ -172,7 +186,7 @@ const ChecklistPage: React.FC = () => {
           <div className="flex items-center space-x-4 mt-4 md:mt-0">
             <button
               onClick={() => setShowAddForm(true)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors duration-200"
+              className="bg-[#34699a] hover:bg-[#2c5882] text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors duration-200"
             >
               <Plus className="w-4 h-4" />
               <span>Add Item</span>
@@ -202,7 +216,7 @@ const ChecklistPage: React.FC = () => {
                     onClick={() => setSelectedVendorType(type.id)}
                     className={`w-full text-left px-4 py-3 rounded-lg transition-colors flex items-center space-x-3 ${
                       selectedVendorType === type.id
-                        ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200'
+                        ? 'bg-[#EBF2F7] dark:bg-[#2A4D69] text-[#34699a] dark:text-[#9FBEDA]' // Primary blue for selected state
                         : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300'
                     }`}
                   >
@@ -227,7 +241,7 @@ const ChecklistPage: React.FC = () => {
                     </div>
                     <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                       <div
-                        className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                        className="bg-[#34699a] h-2 rounded-full transition-all duration-300" // Progress bar in primary blue
                         style={{ width: `${totalItems > 0 ? (checkedItems / totalItems) * 100 : 0}%` }}
                       />
                     </div>
@@ -250,8 +264,8 @@ const ChecklistPage: React.FC = () => {
               <div className="p-6 border-b border-gray-200 dark:border-gray-700">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
-                      <Utensils className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                    <div className="w-12 h-12 bg-[#EBF2F7] dark:bg-[#2A4D69] rounded-lg flex items-center justify-center"> {/* Background for icon in accent color */}
+                      <Utensils className="w-6 h-6 text-[#34699a] dark:text-[#9FBEDA]" /> {/* Icon color */}
                     </div>
                     <div>
                       <h2 className="text-xl font-bold text-gray-900 dark:text-white">
@@ -263,7 +277,7 @@ const ChecklistPage: React.FC = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-blue-600">
+                    <div className="text-2xl font-bold text-[#34699a]"> {/* Percentage in primary blue */}
                       {totalItems > 0 ? Math.round((checkedItems / totalItems) * 100) : 0}%
                     </div>
                     <div className="text-sm text-gray-500 dark:text-gray-400">Complete</div>
@@ -279,7 +293,7 @@ const ChecklistPage: React.FC = () => {
                     return (
                       <div key={category} className="mb-8">
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                          <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
+                          <span className="w-2 h-2 bg-[#34699a] rounded-full mr-3"></span> {/* Category bullet in primary blue */}
                           {category}
                         </h3>
                         <div className="space-y-3">
@@ -297,8 +311,8 @@ const ChecklistPage: React.FC = () => {
                                   onClick={() => toggleItem(item.id)}
                                   className={`mt-1 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${
                                     item.isChecked
-                                      ? 'border-green-500 bg-green-500'
-                                      : 'border-gray-300 dark:border-gray-600 hover:border-green-400'
+                                      ? 'border-green-500 bg-green-500' // Checked state remains green
+                                      : 'border-gray-300 dark:border-gray-600 hover:border-[#34699a] hover:bg-[#EBF2F7] dark:hover:bg-[#2A4D69]' // Hover state in primary blue
                                   }`}
                                 >
                                   {item.isChecked && (
@@ -319,7 +333,7 @@ const ChecklistPage: React.FC = () => {
                                       <span className="text-sm text-gray-600 dark:text-gray-400">
                                         {item.unit}
                                       </span>
-                                      <span className="font-semibold text-blue-600 dark:text-blue-400">
+                                      <span className="font-semibold text-[#34699a] dark:text-[#9FBEDA]"> {/* Estimated price in primary blue */}
                                         ₹{item.estimatedPrice}
                                       </span>
                                       {selectedVendorType === 'custom' && (
@@ -338,7 +352,7 @@ const ChecklistPage: React.FC = () => {
                                     placeholder="Add notes (e.g., preferred brand, quantity needed)..."
                                     value={item.notes}
                                     onChange={(e) => updateNotes(item.id, e.target.value)}
-                                    className="w-full text-sm bg-transparent border border-gray-200 dark:border-gray-600 rounded px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    className="w-full text-sm bg-transparent border border-gray-200 dark:border-gray-600 rounded px-3 py-2 focus:ring-2 focus:ring-[#34699a] focus:border-transparent" // Focus ring in primary blue
                                   />
                                 </div>
                               </div>
@@ -359,7 +373,7 @@ const ChecklistPage: React.FC = () => {
                     </p>
                     <button
                       onClick={() => setShowAddForm(true)}
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg"
+                      className="bg-[#34699a] hover:bg-[#2c5882] text-white px-6 py-2 rounded-lg" // Button in primary blue
                     >
                       Add First Item
                     </button>
@@ -384,7 +398,7 @@ const ChecklistPage: React.FC = () => {
                   placeholder="Item name"
                   value={customItem.name}
                   onChange={(e) => setCustomItem(prev => ({ ...prev, name: e.target.value }))}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#34699a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white" // Focus ring in primary blue
                 />
                 
                 <input
@@ -392,7 +406,7 @@ const ChecklistPage: React.FC = () => {
                   placeholder="Category"
                   value={customItem.category}
                   onChange={(e) => setCustomItem(prev => ({ ...prev, category: e.target.value }))}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#34699a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white" // Focus ring in primary blue
                 />
                 
                 <div className="grid grid-cols-2 gap-4">
@@ -401,7 +415,7 @@ const ChecklistPage: React.FC = () => {
                     placeholder="Unit (kg, liter, etc.)"
                     value={customItem.unit}
                     onChange={(e) => setCustomItem(prev => ({ ...prev, unit: e.target.value }))}
-                    className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#34699a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white" // Focus ring in primary blue
                   />
                   
                   <input
@@ -409,7 +423,7 @@ const ChecklistPage: React.FC = () => {
                     placeholder="Estimated price"
                     value={customItem.price || ''}
                     onChange={(e) => setCustomItem(prev => ({ ...prev, price: parseFloat(e.target.value) || 0 }))}
-                    className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#34699a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white" // Focus ring in primary blue
                   />
                 </div>
               </div>
@@ -417,7 +431,7 @@ const ChecklistPage: React.FC = () => {
               <div className="flex space-x-4 mt-6">
                 <button
                   onClick={addCustomItem}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition-colors duration-200"
+                  className="flex-1 bg-[#34699a] hover:bg-[#2c5882] text-white py-3 rounded-lg font-medium transition-colors duration-200" // Button in primary blue
                 >
                   Add Item
                 </button>

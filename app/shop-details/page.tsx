@@ -1,4 +1,5 @@
 'use client';
+
 import { useState } from 'react';
 import { Store, Package, Plus, Edit, Trash2, Upload, MapPin, Clock, Phone, Save } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -263,7 +264,7 @@ const SellerDashboard = () => {
             />
           </div>
 
-          <Button onClick={handleAddProduct} className="w-full">
+          <Button onClick={handleAddProduct} className="w-full bg-[#34699a] hover:bg-[#2c5882] text-white">
             {editingProduct ? 'Update Product' : 'Add Product'}
           </Button>
         </div>
@@ -280,12 +281,13 @@ const SellerDashboard = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="shop-setup" className="flex items-center gap-2">
+          {/* --- Tabs List with Gradient --- */}
+          <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-[#34699a] to-[#2c5882] text-white">
+            <TabsTrigger value="shop-setup" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-[#34699a] data-[state=active]:shadow-sm data-[state=active]:rounded-md">
               <Store className="w-4 h-4" />
               Shop Setup
             </TabsTrigger>
-            <TabsTrigger value="products" className="flex items-center gap-2">
+            <TabsTrigger value="products" className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:text-[#34699a] data-[state=active]:shadow-sm data-[state=active]:rounded-md">
               <Package className="w-4 h-4" />
               Products ({products.length})
             </TabsTrigger>
@@ -293,13 +295,14 @@ const SellerDashboard = () => {
 
           <TabsContent value="shop-setup" className="space-y-6">
             <Card>
-              <CardHeader>
+              {/* --- Card Header for Shop Info with Blue Background --- */}
+              <CardHeader className="bg-[#34699a] text-white rounded-t-lg">
                 <CardTitle className="flex items-center gap-2">
                   <Store className="w-5 h-5" />
                   Shop Information
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="p-6 space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="shop-name">Shop Name *</Label>
@@ -408,7 +411,7 @@ const SellerDashboard = () => {
                       placeholder="Add specialty (e.g., Organic, Wholesale)"
                       onKeyPress={(e) => e.key === 'Enter' && handleAddSpecialty()}
                     />
-                    <Button onClick={handleAddSpecialty} size="sm">
+                    <Button onClick={handleAddSpecialty} size="sm" className="bg-[#34699a] hover:bg-[#2c5882] text-white">
                       <Plus className="w-4 h-4" />
                     </Button>
                   </div>
@@ -419,7 +422,7 @@ const SellerDashboard = () => {
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="h-auto p-0 ml-1"
+                          className="h-auto p-0 ml-1 text-gray-500 hover:text-gray-700"
                           onClick={() => handleRemoveSpecialty(specialty)}
                         >
                           ×
@@ -429,7 +432,7 @@ const SellerDashboard = () => {
                   </div>
                 </div>
 
-                <Button onClick={handleSaveShop} className="w-full md:w-auto">
+                <Button onClick={handleSaveShop} className="w-full md:w-auto bg-[#34699a] hover:bg-[#2c5882] text-white">
                   <Save className="w-4 h-4 mr-2" />
                   Save Shop Information
                 </Button>
@@ -453,7 +456,7 @@ const SellerDashboard = () => {
                       description: '',
                       stock: 0
                     });
-                  }}>
+                  }} className="bg-[#34699a] hover:bg-[#2c5882] text-white">
                     <Plus className="w-4 h-4 mr-2" />
                     Add Product
                   </Button>
@@ -468,7 +471,7 @@ const SellerDashboard = () => {
                   <Package className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
                   <h3 className="text-xl font-semibold mb-2">No products yet</h3>
                   <p className="text-muted-foreground mb-4">Start by adding your first product to your inventory</p>
-                  <Button onClick={() => setIsProductDialogOpen(true)}>
+                  <Button onClick={() => setIsProductDialogOpen(true)} className="bg-[#34699a] hover:bg-[#2c5882] text-white">
                     <Plus className="w-4 h-4 mr-2" />
                     Add Your First Product
                   </Button>
@@ -478,6 +481,10 @@ const SellerDashboard = () => {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {products.map((product) => (
                   <Card key={product.id} className="overflow-hidden">
+                    {/* --- Product Card Header with Blue Background (Optional, but adds consistency) --- */}
+                    <CardHeader className="bg-[#34699a] text-white py-2 rounded-t-lg">
+                        <CardTitle className="text-base font-semibold truncate">{product.name}</CardTitle>
+                    </CardHeader>
                     <div className="relative h-48 bg-cover bg-center bg-muted">
                       {product.image && (
                         <img

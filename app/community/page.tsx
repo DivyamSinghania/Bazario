@@ -151,7 +151,7 @@ const ForumPage: React.FC = () => {
           
           <button
             onClick={() => setShowNewPostForm(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors duration-200 mt-4 md:mt-0"
+            className="bg-[#34699a] hover:bg-[#2c5882] text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors duration-200 mt-4 md:mt-0"
           >
             <Plus className="w-5 h-5" />
             <span>New Post</span>
@@ -172,7 +172,7 @@ const ForumPage: React.FC = () => {
                     onClick={() => setSelectedCategory(category)}
                     className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
                       selectedCategory === category
-                        ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200'
+                        ? 'bg-[#EBF2F7] dark:bg-[#2A4D69] text-[#34699a] dark:text-[#9FBEDA]' // Primary blue for selected category
                         : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300'
                     }`}
                   >
@@ -225,10 +225,10 @@ const ForumPage: React.FC = () => {
                           {post.author}
                         </h4>
                         {post.isPinned && (
-                          <Pin className="w-4 h-4 text-blue-600" />
+                          <Pin className="w-4 h-4 text-[#34699a]" /> {/* Pinned icon in primary blue */}
                         )}
                         {post.isTrending && (
-                          <Flame className="w-4 h-4 text-orange-500" />
+                          <Flame className="w-4 h-4 text-orange-500" /> {/* Trending icon remains orange */}
                         )}
                       </div>
                       <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
@@ -257,18 +257,18 @@ const ForumPage: React.FC = () => {
                 <div className="flex items-center space-x-6 pt-4 border-t border-gray-200 dark:border-gray-700">
                   <button
                     onClick={() => handleLike(post.id)}
-                    className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-[#34699a] dark:hover:text-[#9FBEDA] transition-colors" // Hover effect for actions in primary blue
                   >
                     <ThumbsUp className="w-4 h-4" />
                     <span className="text-sm">{post.likes}</span>
                   </button>
                   
-                  <button className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  <button className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-[#34699a] dark:hover:text-[#9FBEDA] transition-colors">
                     <Reply className="w-4 h-4" />
                     <span className="text-sm">{post.replies} replies</span>
                   </button>
                   
-                  <button className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  <button className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-[#34699a] dark:hover:text-[#9FBEDA] transition-colors">
                     <MessageSquare className="w-4 h-4" />
                     <span className="text-sm">Discuss</span>
                   </button>
@@ -306,7 +306,7 @@ const ForumPage: React.FC = () => {
                   <select
                     value={newPost.category}
                     onChange={(e) => setNewPost(prev => ({ ...prev, category: e.target.value }))}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#34699a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white" // Focus ring in primary blue
                   >
                     {categories.slice(1).map(category => (
                       <option key={category} value={category}>
@@ -325,7 +325,7 @@ const ForumPage: React.FC = () => {
                     placeholder="What's your question or topic?"
                     value={newPost.title}
                     onChange={(e) => setNewPost(prev => ({ ...prev, title: e.target.value }))}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#34699a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white" // Focus ring in primary blue
                   />
                 </div>
                 
@@ -338,7 +338,7 @@ const ForumPage: React.FC = () => {
                     placeholder="Describe your question or share your experience..."
                     value={newPost.content}
                     onChange={(e) => setNewPost(prev => ({ ...prev, content: e.target.value }))}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#34699a] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none" // Focus ring in primary blue
                   />
                 </div>
               </div>
@@ -346,7 +346,7 @@ const ForumPage: React.FC = () => {
               <div className="flex space-x-4 mt-6">
                 <button
                   onClick={handleNewPost}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition-colors duration-200"
+                  className="flex-1 bg-[#34699a] hover:bg-[#2c5882] text-white py-3 rounded-lg font-medium transition-colors duration-200" // Button in primary blue
                 >
                   Post
                 </button>

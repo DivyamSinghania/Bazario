@@ -109,8 +109,8 @@ const ReviewsPage: React.FC = () => {
         key={index}
         className={`${size} ${
           index < rating
-            ? 'text-yellow-500 fill-current'
-            : 'text-gray-300 dark:text-gray-600'
+            ? 'text-yellow-500 fill-current' // Yellow for filled stars
+            : 'text-gray-300 dark:text-gray-600' // Gray for empty stars
         }`}
       />
     ));
@@ -174,7 +174,7 @@ const ReviewsPage: React.FC = () => {
             {/* Filters */}
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                <Filter className="w-5 h-5 mr-2" />
+                <Filter className="w-5 h-5 mr-2 text-[#34699A]" /> {/* Icon color */}
                 Filters
               </h3>
               
@@ -188,7 +188,7 @@ const ReviewsPage: React.FC = () => {
                     onClick={() => setFilterRating(0)}
                     className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
                       filterRating === 0
-                        ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200'
+                        ? 'bg-[#EBF2F7] dark:bg-[#2A4D69] text-[#34699A] dark:text-[#9FBEDA]' // Custom blue light/dark
                         : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300'
                     }`}
                   >
@@ -200,7 +200,7 @@ const ReviewsPage: React.FC = () => {
                       onClick={() => setFilterRating(rating)}
                       className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center space-x-2 ${
                         filterRating === rating
-                          ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200'
+                          ? 'bg-[#EBF2F7] dark:bg-[#2A4D69] text-[#34699A] dark:text-[#9FBEDA]' // Custom blue light/dark
                           : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300'
                       }`}
                     >
@@ -221,7 +221,7 @@ const ReviewsPage: React.FC = () => {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#34699A] focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
                   <option value="newest">Newest First</option>
                   <option value="oldest">Oldest First</option>
@@ -278,7 +278,7 @@ const ReviewsPage: React.FC = () => {
                       <p className="text-sm text-gray-600 dark:text-gray-400">
                         <span className="font-medium">{review.productName}</span>
                         {' from '}
-                        <span className="font-medium text-blue-600 dark:text-blue-400">
+                        <span className="font-medium text-[#34699A] dark:text-[#9FBEDA]"> {/* Supplier name color */}
                           {review.supplierName}
                         </span>
                       </p>
@@ -291,12 +291,12 @@ const ReviewsPage: React.FC = () => {
 
                     {/* Review Actions */}
                     <div className="flex items-center space-x-6">
-                      <button className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      <button className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-[#34699A] dark:hover:text-[#9FBEDA] transition-colors">
                         <ThumbsUp className="w-4 h-4" />
                         <span className="text-sm">{review.likes}</span>
                       </button>
                       
-                      <button className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      <button className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-[#34699A] dark:hover:text-[#9FBEDA] transition-colors">
                         <MessageSquare className="w-4 h-4" />
                         <span className="text-sm">{review.replies} replies</span>
                       </button>

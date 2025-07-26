@@ -3,15 +3,22 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Search, ShoppingCart, HeartIcon, Menu, User, LogOut, Store } from 'lucide-react';
+import {
+  Search,
+  ShoppingCart,
+  HeartIcon,
+  Menu,
+  User,
+  LogOut,
+  Store,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { useAuth } from '@/lib/contexts/auth-context';
 import { useCart } from '@/lib/contexts/cart-context';
 import { useWishlist } from '@/lib/contexts/wishlist-context';
-import dbConnect from '@/lib/contexts/mongodb.js';
-import UserSchema from '@/models/User';
+import GoogleTranslate from '@/components/google-translate';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,17 +26,16 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import  GoogleTranslate  from '@/components/google-translate';
 
-
-export async function Header() {
+export function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
   const { user, userProfile, signOut } = useAuth();
   const { getTotalItems } = useCart();
   const { items: wishlistItems } = useWishlist();
-  
-  
+
+  const { name, email, userType } = user || {};
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -46,14 +52,12 @@ export async function Header() {
     { name: 'Home', href: '/' },
     { name: 'Discover', href: '/discovery' },
     { name: 'Map', href: '/map' },
-    // { name: 'Reviews', href: '/reviews' },
     { name: 'Checklist', href: '/checklist' },
-    // { name: 'Community', href: '/community' },
     { name: 'Price Comparison', href: '/price-comparison' },
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+<header className="sticky top-0 z-50 w-full border-b bg-[#34699A] text-white shadow-md">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -62,12 +66,15 @@ export async function Header() {
               <span className="text-white font-bold text-sm">B</span>
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Bazario 
+              Bazario
             </span>
           </Link>
 
-          {/* Search Bar - Hidden on mobile */}
-          <form onSubmit={handleSearch} className="hidden md:flex items-center flex-1 max-w-lg mx-8">
+          {/* Search Bar */}
+          <form
+            onSubmit={handleSearch}
+            className="hidden md:flex items-center flex-1 max-w-lg mx-8"
+          >
             <div className="relative w-full">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
@@ -97,8 +104,8 @@ export async function Header() {
           <div className="flex items-center space-x-2">
             <GoogleTranslate />
             <ThemeToggle />
-            
-            {/* {user ? ( */}
+
+            {user ? (
               <>
                 {/* Cart */}
                 <Link href="/cart">
@@ -137,12 +144,13 @@ export async function Header() {
                       <div className="text-muted-foreground">{email}</div>
                     </div>
                     {userType === 'wholesaler' && (
-                      <DropdownMenuItem onClick={() => router.push('/shop-details')}>
+                      <DropdownMenuItem
+                        onClick={() => router.push('/shop-details')}
+                      >
                         <Store className="mr-2 h-4 w-4" />
                         Shop
                       </DropdownMenuItem>
                     )}
-
                     <DropdownMenuItem onClick={handleSignOut}>
                       <LogOut className="mr-2 h-4 w-4" />
                       Sign Out
@@ -150,11 +158,11 @@ export async function Header() {
                   </DropdownMenuContent>
                 </DropdownMenu>
               </>
-             {/* ) : (
-               <Link href="/auth">
-                 <Button>Sign In</Button>
-               </Link>
-             )} */}
+            ) : (
+              <Link href="/auth">
+                <Button>Sign In</Button>
+              </Link>
+            )}
 
             {/* Mobile Menu */}
             <Sheet>

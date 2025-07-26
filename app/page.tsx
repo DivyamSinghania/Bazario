@@ -1,11 +1,21 @@
+// All color references updated to #34699a
+
 'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Search, Star, MapPin, Users, CheckCircle, MessageCircle, TrendingUp } from 'lucide-react';
+import {
+  Search,
+  Star,
+  MapPin,
+  Users,
+  CheckCircle,
+  MessageCircle,
+  TrendingUp,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Footer from '@/components/layout/Footer';
 
@@ -27,7 +37,8 @@ const trendingSellers = [
     reviews: 245,
     speciality: 'Premium Spices',
     distance: '1.2 km',
-    image: 'https://images.pexels.com/photos/4198019/pexels-photo-4198019.jpeg?auto=compress&cs=tinysrgb&w=300'
+    image:
+      'https://images.pexels.com/photos/4198019/pexels-photo-4198019.jpeg?auto=compress&cs=tinysrgb&w=300',
   },
   {
     id: '2',
@@ -37,7 +48,8 @@ const trendingSellers = [
     reviews: 189,
     speciality: 'Organic Vegetables',
     distance: '2.8 km',
-    image: 'https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg?auto=compress&cs=tinysrgb&w=300'
+    image:
+      'https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg?auto=compress&cs=tinysrgb&w=300',
   },
   {
     id: '3',
@@ -47,7 +59,8 @@ const trendingSellers = [
     reviews: 156,
     speciality: 'Cooking Oils',
     distance: '3.1 km',
-    image: 'https://images.pexels.com/photos/4198017/pexels-photo-4198017.jpeg?auto=compress&cs=tinysrgb&w=300'
+    image:
+      'https://images.pexels.com/photos/4198017/pexels-photo-4198017.jpeg?auto=compress&cs=tinysrgb&w=300',
   },
 ];
 
@@ -64,16 +77,16 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-20">
+      <section className="relative bg-gradient-to-br from-[#34699a]/10 via-white to-[#34699a]/5 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-[#34699a] to-[#34699a] bg-clip-text text-transparent">
               Find Trusted Suppliers in Your Community
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Connect with verified sellers, share experiences, and build your vendor network with real-time prices and reviews.
             </p>
-            
+
             {/* Search Form */}
             <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-12">
               <div className="flex gap-4">
@@ -87,31 +100,11 @@ export default function HomePage() {
                     className="pl-10 h-12 text-lg"
                   />
                 </div>
-                <Button type="submit" size="lg" className="px-8">
+                <Button type="submit" size="lg" className="bg-[#34699a] text-white hover:bg-[#2b5a80] px-8">
                   Search
                 </Button>
               </div>
             </form>
-
-            {/* Quick Stats */}
-            {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600">500+</div>
-                <div className="text-sm text-muted-foreground">Verified Sellers</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-green-600">2.5K+</div>
-                <div className="text-sm text-muted-foreground">Happy Vendors</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600">50+</div>
-                <div className="text-sm text-muted-foreground">Cities Covered</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-orange-600">10K+</div>
-                <div className="text-sm text-muted-foreground">Reviews</div>
-              </div>
-            </div> */}
           </div>
         </div>
       </section>
@@ -119,7 +112,7 @@ export default function HomePage() {
       {/* Categories Section */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Popular Categories</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#34699a]">Popular Categories</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {categories.map((category) => (
               <Link key={category.name} href={`/discovery?category=${category.name.toLowerCase()}`}>
@@ -140,19 +133,24 @@ export default function HomePage() {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-12">
-            <h2 className="text-3xl font-bold">🔥 Trending Sellers</h2>
+            <h2 className="text-3xl font-bold text-[#34699a]">🔥 Trending Sellers</h2>
             <Link href="/discovery">
-              <Button variant="outline">View All</Button>
+              <Button variant="outline" className="border-[#34699a] text-[#34699a] hover:bg-[#34699a]/10">
+                View All
+              </Button>
             </Link>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {trendingSellers.map((seller) => (
               <Link key={seller.id} href={`/shop/${seller.id}`}>
                 <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden">
-                  <div className="relative h-48 bg-cover bg-center" style={{ backgroundImage: `url(${seller.image})` }}>
+                  <div
+                    className="relative h-48 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${seller.image})` }}
+                  >
                     <div className="absolute inset-0 bg-black/40" />
-                    <Badge className="absolute top-3 right-3 bg-green-500">
+                    <Badge className="absolute top-3 right-3 bg-[#3b945e] text-white">
                       <TrendingUp className="w-3 h-3 mr-1" />
                       Trending
                     </Badge>
@@ -167,12 +165,12 @@ export default function HomePage() {
                       <div className="flex items-center">
                         <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 mr-1" />
                         <span className="font-medium">{seller.rating}</span>
-                        <span className="text-muted-foreground text-sm ml-1">({seller.reviews} reviews)</span>
+                        <span className="text-muted-foreground text-sm ml-1">
+                          ({seller.reviews} reviews)
+                        </span>
                       </div>
                     </div>
-                    <Badge variant="secondary" className="text-xs">
-                      {seller.speciality}
-                    </Badge>
+                    <Badge variant="secondary" className="text-xs">{seller.speciality}</Badge>
                   </CardContent>
                 </Card>
               </Link>
@@ -184,66 +182,54 @@ export default function HomePage() {
       {/* Features Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Why Choose VendorHub?</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#34699a]">Why Choose VendorHub?</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                <MapPin className="w-8 h-8 text-blue-600" />
+            {[
+              { icon: <MapPin className="w-8 h-8 text-[#34699a]" />, title: 'Location-Based Discovery', desc: 'Find suppliers near you with accurate distance and area information.' },
+              { icon: <Star className="w-8 h-8 text-[#34699a]" />, title: 'Verified Reviews', desc: 'Read authentic reviews from fellow vendors to make informed decisions.' },
+              { icon: <CheckCircle className="w-8 h-8 text-[#34699a]" />, title: 'Smart Checklists', desc: 'Use ready-made checklists for raw materials and share your own.' },
+              { icon: <MessageCircle className="w-8 h-8 text-[#34699a]" />, title: 'Community Support', desc: 'Connect with other vendors, ask questions, and share experiences.' },
+            ].map((feature, i) => (
+              <div key={i} className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-[#34699a]/10 dark:bg-[#34699a]/20 rounded-full flex items-center justify-center">
+                  {feature.icon}
+                </div>
+                <h3 className="font-bold text-lg mb-2">{feature.title}</h3>
+                <p className="text-muted-foreground">{feature.desc}</p>
               </div>
-              <h3 className="font-bold text-lg mb-2">Location-Based Discovery</h3>
-              <p className="text-muted-foreground">Find suppliers near you with accurate distance and area information.</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
-                <Star className="w-8 h-8 text-green-600" />
-              </div>
-              <h3 className="font-bold text-lg mb-2">Verified Reviews</h3>
-              <p className="text-muted-foreground">Read authentic reviews from fellow vendors to make informed decisions.</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
-                <CheckCircle className="w-8 h-8 text-purple-600" />
-              </div>
-              <h3 className="font-bold text-lg mb-2">Smart Checklists</h3>
-              <p className="text-muted-foreground">Use ready-made checklists for raw materials and share your own.</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center">
-                <MessageCircle className="w-8 h-8 text-orange-600" />
-              </div>
-              <h3 className="font-bold text-lg mb-2">Community Support</h3>
-              <p className="text-muted-foreground">Connect with other vendors, ask questions, and share experiences.</p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
+      <section className="py-16 bg-[#34699a] text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Ready to Transform Your Vendor Experience?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Vendor Experience?</h2>
+          <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
             Join thousands of vendors who are already building stronger supplier relationships and growing their businesses.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/auth">
-              <Button size="lg" variant="secondary" className="px-8">
+              <Button size="lg" variant="secondary" className="bg-white text-[#34699a] hover:bg-gray-100 px-8">
                 <Users className="w-5 h-5 mr-2" />
                 Join Community
               </Button>
             </Link>
             <Link href="/discovery">
-              <Button size="lg" variant="outline" className="px-8 border-white hover:text-blue-600">
+              <Button
+                size="lg"
+                variant="secondary"
+                className="bg-white text-[#34699a] hover:bg-gray-100 px-8"
+              >
                 Explore Suppliers
               </Button>
             </Link>
           </div>
         </div>
       </section>
-      <Footer/>
+
+      <Footer />
     </div>
   );
 }

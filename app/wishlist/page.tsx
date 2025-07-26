@@ -46,13 +46,15 @@ export default function WishlistPage() {
               Save items you love to buy them later. Your wishlist will appear here.
             </p>
             <Link href="/discovery">
-              <Button size="lg">
+              {/* Apply #34699a to the "Start Browse" button */}
+              <Button size="lg" className="bg-[#34699a] hover:bg-[#2c5882] text-white">
                 <Heart className="w-5 h-5 mr-2" />
-                Start Browsing
+                Start Browse
               </Button>
             </Link>
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }
@@ -69,6 +71,7 @@ export default function WishlistPage() {
             </Link>
             <div>
               <h1 className="text-3xl font-bold flex items-center">
+                {/* Keep Heart icon red for visual cue of wishlist */}
                 <Heart className="w-8 h-8 mr-3 fill-red-500 text-red-500" />
                 My Wishlist
               </h1>
@@ -106,8 +109,9 @@ export default function WishlistPage() {
                 <p className="text-2xl font-bold text-primary mb-4">₹{item.price}</p>
                 
                 <div className="flex space-x-2">
+                  {/* Apply #34699a to the "Add to Cart" button */}
                   <Button 
-                    className="flex-1"
+                    className="flex-1 bg-[#34699a] hover:bg-[#2c5882] text-white"
                     onClick={() => handleAddToCart(item)}
                   >
                     <ShoppingCart className="w-4 h-4 mr-2" />
