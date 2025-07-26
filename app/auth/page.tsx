@@ -305,9 +305,18 @@ export default function AuthPage() {
         }),
       });
 
-      if (!res.ok) throw new Error('API error');
+      const data = await res.json();
+      
+      if (!res.ok) {
+        throw new Error(data.message || 'API error');
+      }
 
-      toast.success('Account created successfully!');
+      if (data.message.includes('Welcome back')) {
+        toast.success('Welcome back! You are now logged in.');
+      } else {
+        toast.success('Account created successfully!');
+      }
+      
       router.push('/');
     } catch (error) {
       console.error('Error creating profile:', error);

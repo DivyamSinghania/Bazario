@@ -28,8 +28,23 @@ export default async function handler(req, res) {
     // Check if user already exists with this phone
     const existingUser = await User.findOne({ phone });
     if (existingUser) {
-      return res.status(400).json({
-        message: 'User already exists with this phone number',
+      // Return success with existing user instead of error
+      const userResponse = {
+        _id: existingUser._id,
+        name: existingUser.name,
+        phone: existingUser.phone,
+        city: existingUser.city,
+        userType: existingUser.userType,
+        role: existingUser.role,
+        isVerified: existingUser.isVerified,
+        avatar: existingUser.avatar,
+        createdAt: existingUser.createdAt,
+      };
+
+      return res.status(200).json({
+        success: true,
+        message: 'Welcome back! Logged in successfully.',
+        user: userResponse,
       });
     }
 
@@ -65,24 +80,36 @@ export default async function handler(req, res) {
     });
   } catch (error) {
     console.error('User creation error:', error);
+    console.error('Error details:', {
+      name: error.name,
+      code: error.code,
+      message: error.message,
+      keyPattern: error.keyPattern,
+      keyValue: error.keyValue
+    });
     
     // Handle validation errors
     if (error.name === 'ValidationError') {
       const errors = Object.values(error.errors).map(err => err.message);
       return res.status(400).json({
+        success: false,
         message: 'Validation error',
         errors,
       });
     }
 
-    // Handle duplicate key error
+    // Handle duplicate key error (MongoDB duplicate)
     if (error.code === 11000) {
+      const field = Object.keys(error.keyPattern)[0];
+      const value = error.keyValue[field];
       return res.status(400).json({
-        message: 'User already exists with this phone number',
+        success: false,
+        message: `User already exists with this ${field}: ${value}`,
       });
     }
 
     res.status(500).json({
+      success: false,
       message: 'Internal server error',
     });
   }
