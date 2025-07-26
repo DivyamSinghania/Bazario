@@ -12,7 +12,7 @@ import '@/styles/google-translate.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'VendorHub - Community Platform for Vendors',
+  title: 'Bazario - Community Place for Vendors',
   description: 'Find trusted suppliers, share experiences, and connect with fellow vendors in your community.',
 };
 
