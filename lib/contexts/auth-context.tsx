@@ -1,111 +1,83 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
-import { 
-  User, 
-  onAuthStateChanged, 
-  signInWithPhoneNumber, 
-  RecaptchaVerifier,
-  ConfirmationResult,
-  signOut as firebaseSignOut
-} from 'firebase/auth';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { auth, db } from '@/lib/firebase';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
-interface UserProfile {
-  uid: string;
+interface User {
+  _id: string;
   name: string;
-  phone: string;
-  city: string;
-  userType: 'vendor' | 'helper';
-  createdAt: Date;
+  email: string;
+  role: string;
+  isVerified: boolean;
+  avatar: string;
+  createdAt: string;
+  userType?: string;
+  city?: string;
 }
 
 interface AuthContextType {
   user: User | null;
-  userProfile: UserProfile | null;
-  loading: boolean;
-  signInWithPhone: (phoneNumber: string) => Promise<ConfirmationResult>;
-  verifyOTP: (confirmationResult: ConfirmationResult, otp: string, profileData: Omit<UserProfile, 'uid' | 'createdAt'>) => Promise<void>;
-  signOut: () => Promise<void>;
-  setupRecaptcha: () => RecaptchaVerifier;
+  token: string | null;
+  login: (user: User, token: string) => void;
+  logout: () => void;
+  isAuthenticated: boolean;
+  isLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [token, setToken] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setUser(user);
-        // Fetch user profile
-        const profileDoc = await getDoc(doc(db, 'users', user.uid));
-        if (profileDoc.exists()) {
-          setUserProfile(profileDoc.data() as UserProfile);
-        }
-      } else {
-        setUser(null);
-        setUserProfile(null);
-      }
-      setLoading(false);
-    });
+    // Check for stored authentication data on mount
+    const storedToken = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('user');
 
-    return unsubscribe;
+    if (storedToken && storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+        setToken(storedToken);
+      } catch (error) {
+        console.error('Error parsing stored user data:', error);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+      }
+    }
+    
+    setIsLoading(false);
   }, []);
 
-  const setupRecaptcha = () => {
-    const recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-      size: 'invisible',
-      callback: () => {
-        // reCAPTCHA solved
-      },
-    });
-    return recaptchaVerifier;
+  const login = (userData: User, authToken: string) => {
+    setUser(userData);
+    setToken(authToken);
+    localStorage.setItem('token', authToken);
+    localStorage.setItem('user', JSON.stringify(userData));
   };
 
-  const signInWithPhone = async (phoneNumber: string) => {
-    const recaptchaVerifier = setupRecaptcha();
-    return signInWithPhoneNumber(auth, phoneNumber);
-  };
-
-  const verifyOTP = async (
-    confirmationResult: ConfirmationResult, 
-    otp: string, 
-    profileData: Omit<UserProfile, 'uid' | 'createdAt'>
-  ) => {
-    const result = await confirmationResult.confirm(otp);
-    const user = result.user;
-    
-    // Save user profile to Firestore
-    const userProfile: UserProfile = {
-      uid: user.uid,
-      ...profileData,
-      createdAt: new Date(),
-    };
-    
-    await setDoc(doc(db, 'users', user.uid), userProfile);
-    setUserProfile(userProfile);
-  };
-
-  const signOut = async () => {
-    await firebaseSignOut(auth);
+  const logout = () => {
+    setUser(null);
+    setToken(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
   };
 
   const value = {
     user,
-    userProfile,
-    loading,
-    signInWithPhone,
-    verifyOTP,
-    signOut,
-    setupRecaptcha,
+    token,
+    login,
+    logout,
+    isAuthenticated: !!user && !!token,
+    isLoading,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export function useAuth() {
