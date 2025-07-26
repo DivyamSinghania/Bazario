@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Star, Filter, ThumbsUp, MessageSquare } from 'lucide-react';
+import Footer from '@/components/layout/Footer';
 
 interface Review {
   id: number;
@@ -319,6 +320,7 @@ const ReviewsPage: React.FC = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { TrendingUp, TrendingDown, Minus, Plus, BarChart3, MapPin } from 'lucide-react';
+import Footer from '@/components/layout/Footer';
 
 interface PriceData {
   id: string;
@@ -453,6 +454,7 @@ const PriceTrackerPage: React.FC = () => {
           </div>
         )}
       </div>
+      <Footer/>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { CartProvider } from '@/lib/contexts/cart-context';
 import { WishlistProvider } from '@/lib/contexts/wishlist-context';
 import { Header } from '@/components/layout/header';
 import { Toaster } from '@/components/ui/sonner';
+import '@/styles/google-translate.css';
 
 const inter = Inter({ subsets: ['latin'] });
 

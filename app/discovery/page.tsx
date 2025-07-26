@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import Footer from '@/components/layout/Footer';
 import {
   Select,
   SelectContent,
@@ -377,6 +378,7 @@ export default function DiscoveryPage() {
           )}
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Download, Plus, Check, X, FileText, Utensils } from 'lucide-react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import Footer from '@/components/layout/Footer';
 
 interface ChecklistItem {
   id: string;
@@ -431,6 +432,7 @@ const ChecklistPage: React.FC = () => {
           </div>
         )}
       </div>
+      <Footer/>
     </div>
   );
 };

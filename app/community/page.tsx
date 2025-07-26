@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { MessageSquare, Plus, ThumbsUp, Reply, Clock, Pin, Flame } from 'lucide-react';
+import Footer from '@/components/layout/Footer';
 
 interface ForumPost {
   id: number;
@@ -360,6 +361,7 @@ const ForumPage: React.FC = () => {
           </div>
         )}
       </div>
+      <Footer/>
     </div>
   );
 };

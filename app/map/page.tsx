@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { MapPin, Navigation, Clock, IndianRupee, Star, Phone } from 'lucide-react';
+import Footer from '@/components/layout/Footer';
 
 interface Deal {
   id: string;
@@ -100,7 +101,7 @@ const DealsMap: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 ">
       <div className="bg-gradient-to-r from-green-500 to-blue-500 text-white p-6 rounded-xl">
         <div className="flex items-center space-x-3 mb-4">
           <MapPin size={32} />
@@ -137,13 +138,13 @@ const DealsMap: React.FC = () => {
           </div>
         </div>
         
-        <div className="p-4 border-t bg-gray-50">
+        <div className="p-4 border-t bg-gray-50 dark:bg-gray-900">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-gray-600 dark:text-white">
               <Navigation size={16} className="inline mr-1" />
               Showing deals within 5km radius
             </span>
-            <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+            <button className="text-blue-600 hover:text-blue-700 dark:text-blue-600 dark:hover:text-blue-500 text-sm font-medium">
               Enable Location
             </button>
           </div>
@@ -160,7 +161,7 @@ const DealsMap: React.FC = () => {
         {deals.map((deal) => (
           <div 
             key={deal.id}
-            className="bg-white p-4 rounded-lg shadow-sm border hover:shadow-md transition-shadow cursor-pointer"
+            className="bg-white p-4 rounded-lg shadow-sm border hover:shadow-md transition-shadow cursor-pointer dark:bg-gray-900 "
             onClick={() => setSelectedDeal(deal)}
           >
             <div className="flex items-start justify-between">
@@ -180,13 +181,13 @@ const DealsMap: React.FC = () => {
                 <div className="flex items-center space-x-4 mb-2">
                   <div className="flex items-center space-x-1">
                     <IndianRupee size={16} className="text-green-600" />
-                    <span className="font-bold text-green-600 text-lg">₹{deal.price}</span>
-                    <span className="text-gray-500">/{deal.unit}</span>
-                    <span className="line-through text-gray-400 text-sm">₹{deal.originalPrice}</span>
+                    <span className="font-bold text-green-600 dark:text-green-400 text-lg">₹{deal.price}</span>
+                    <span className="text-gray-500 dark:text-gray-200">/{deal.unit}</span>
+                    <span className="line-through text-gray-400 text-sm dark:text-gray-200">₹{deal.originalPrice}</span>
                   </div>
                 </div>
                 
-                <div className="flex items-center space-x-4 text-sm text-gray-600">
+                <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-white">
                   <div className="flex items-center space-x-1">
                     <span className="font-medium">{deal.sellerName}</span>
                     <div className="flex items-center space-x-1">
@@ -205,7 +206,7 @@ const DealsMap: React.FC = () => {
                 </div>
                 
                 <div className="flex items-center justify-between mt-3">
-                  <div className="flex items-center space-x-1 text-xs text-gray-500">
+                  <div className="flex items-center space-x-1 text-xs text-gray-500 dark:text-gray-300">
                     <Clock size={12} />
                     <span>Posted {deal.timePosted}</span>
                   </div>
@@ -226,30 +227,30 @@ const DealsMap: React.FC = () => {
       </div>
 
       {/* Report Deal */}
-      <div className="bg-white p-6 rounded-lg shadow-sm border">
+      <div className="bg-white p-6 rounded-lg shadow-sm border dark:bg-gray-900 dark:text-gray-200">
         <h3 className="text-lg font-semibold mb-4">Report a Deal</h3>
-        <p className="text-gray-600 mb-4">Found a great deal? Share it with the community!</p>
+        <p className="text-gray-600 mb-4 dark:text-gray-400">Found a great deal? Share it with the community!</p>
         
         <div className="grid md:grid-cols-2 gap-4">
           <input 
             type="text" 
             placeholder="Item name"
-            className="p-3 border rounded-lg"
+            className="p-3 border rounded-lg "
           />
           <input 
             type="number" 
             placeholder="Deal price"
-            className="p-3 border rounded-lg"
+            className="p-3 border rounded-lg "
           />
           <input 
             type="text" 
             placeholder="Seller name"
-            className="p-3 border rounded-lg"
+            className="p-3 border rounded-lg "
           />
           <input 
             type="text" 
             placeholder="Location"
-            className="p-3 border rounded-lg"
+            className="p-3 border rounded-lg "
           />
         </div>
         
@@ -318,6 +319,7 @@ const DealsMap: React.FC = () => {
           </div>
         </div>
       )}
+      <Footer/>
     </div>
   );
 };

@@ -69,7 +69,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signInWithPhone = async (phoneNumber: string) => {
     const recaptchaVerifier = setupRecaptcha();
-    return signInWithPhoneNumber(auth, phoneNumber, recaptchaVerifier);
+    return signInWithPhoneNumber(auth, phoneNumber);
   };
 
   const verifyOTP = async (

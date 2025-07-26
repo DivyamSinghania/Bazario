@@ -17,7 +17,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { GoogleTranslate } from '@/components/google-translate';
+import  GoogleTranslate  from '@/components/google-translate';
+
 
 export function Header() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -55,10 +56,10 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center">
-              <span className="text-white font-bold text-sm">V</span>
+              <span className="text-white font-bold text-sm">B</span>
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              VendorHub
+              Bazario 
             </span>
           </Link>
 
@@ -94,7 +95,7 @@ export function Header() {
             <GoogleTranslate />
             <ThemeToggle />
             
-            {/* {user ? ( */}
+            {user ? (
               <>
                 {/* Cart */}
                 <Link href="/cart">
@@ -139,11 +140,11 @@ export function Header() {
                   </DropdownMenuContent>
                 </DropdownMenu>
               </>
-             {/* ) : (
+             ) : (
                <Link href="/auth">
                  <Button>Sign In</Button>
                </Link>
-             )} */}
+             )}
 
             {/* Mobile Menu */}
             <Sheet>

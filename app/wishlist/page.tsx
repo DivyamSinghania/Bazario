@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useWishlist } from '@/lib/contexts/wishlist-context';
 import { useCart } from '@/lib/contexts/cart-context';
 import { toast } from 'sonner';
+import Footer from '@/components/layout/Footer';
 
 export default function WishlistPage() {
   const { items, removeItem, clearWishlist } = useWishlist();
@@ -123,6 +124,7 @@ export default function WishlistPage() {
           ))}
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useCart } from '@/lib/contexts/cart-context';
 import { useWishlist } from '@/lib/contexts/wishlist-context';
 import { toast } from 'sonner';
+import Footer from '@/components/layout/Footer';
 
 const mockShopData = {
   '1': {
@@ -323,6 +324,7 @@ export default function ShopPage() {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }
