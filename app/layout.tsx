@@ -5,7 +5,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { AuthProvider } from '@/lib/contexts/auth-context';
 import { CartProvider } from '@/lib/contexts/cart-context';
 import { WishlistProvider } from '@/lib/contexts/wishlist-context';
-import { Header } from '@/components/layout/header';
+import Navigation from '@/components/layout/header';
 import { Toaster } from '@/components/ui/sonner';
 import '@/styles/google-translate.css';
 
@@ -34,7 +34,7 @@ export default function RootLayout({
             <CartProvider>
               <WishlistProvider>
                 <div className="min-h-screen bg-background">
-                  <Header />
+                  <Navigation />
                   <main>{children}</main>
                   <div id="recaptcha-container"></div>
                   <Toaster />
